@@ -2,7 +2,8 @@
     #define GL_SILENCE_DEPRECATION
     #include <GLUT/glut.h>
     #include <OpenGL/gl.h>
-    #include <OpenGL/glu.h>
+    #include <OpenGL/glu.h
+
 #else
     #include <GL/glut.h>
     #include <GL/gl.h>
@@ -14,7 +15,7 @@
 
 #define ESC 27
 
-static int ombro = 0, cotovelo = 0, polegar = 0, anelar = 0, indicador = 0, fy = 0;
+static int ombro = 0, cotovelo = 50, dedo2 = 0, dedo3 = 0, dedo1 = 0, fy = 5;
 
 void init(void);
 void keyboard (unsigned char key, int x, int y);
@@ -28,7 +29,7 @@ int main(int argc, char** argv){
 
     // inicia o display usando RGB, double-buffering e z-buffering
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(800,600);
+    glutInitWindowSize(900,550);
     glutInitWindowPosition(100,100);
     glutCreateWindow("Computacao Grafica: Braco Robotico");
 
@@ -69,21 +70,15 @@ void reshape (int w, int h){
     glMatrixMode (GL_MODELVIEW);
 }
 
-// Fucao callback para controle das teclas comuns
+// Funcao callback para controle das teclas comuns
 void keyboard (unsigned char key, int x, int y){
 	switch (key) {
-		case 'o': ombro = (ombro - 5) % 360; break; // sentido horario
-		case 'O': ombro = (ombro + 5) % 360; break; // sentido anti-horario
-		case 'c': cotovelo = (cotovelo - 5) % 360; break; // sentido horario
-		case 'C': cotovelo = (cotovelo + 5) % 360; break; // sentido anti-horario
-        case 'i': indicador = (indicador + 5) % 360; break; // sentido anti-hor�rio
-        case 'I': indicador = (indicador - 5) % 360; break; // sentido horario
- 	    case 'p': polegar = (polegar + 5) % 360; break; // sentido anti-hor�rio
-        case 'P': polegar = (polegar - 5) % 360; break; // sentido horario
-  	    case 'a': anelar = (anelar + 5) % 360; break; // sentido anti-hor�rio
-   	    case 'A': anelar = (anelar - 5) % 360; break;// sentido horario
-        case 'y': fy = (fy + 5) % 360; break; // sentido anti-horario
-  	    case 'Y': fy = (fy - 5) % 360; break; // sentido horario
+		case 'o': ombro = (ombro - 4) % 360; break;
+		case 'c': cotovelo = (cotovelo - 4) % 360; break;
+        case '1': dedo1 = (dedo1 + 4) % 360; break;
+ 	    case '2': dedo2 = (dedo2 + 4) % 360; break;
+  	    case '3': dedo3 = (dedo3 + 4) % 360; break;
+        case 'y': fy = (fy + 4) % 360; break;
 		case ESC: exit(EXIT_SUCCESS); break; // sai do programa
 	}
     glutPostRedisplay();
@@ -157,9 +152,9 @@ void display(void){
  // Dentro da fun��o display()
 // Polegar
 glPushMatrix();
-    glTranslatef(-0.5, 1.0, 0.0); // Posi��o inicial do polegar em rela��o ao antebra�o
-    glRotatef((GLfloat) polegar, 1.0, 0.0, 0.0); // Rota��o do polegar em torno do pr�prio eixo
-    glTranslatef(0.5, 0.4, -0.2); // Ajuste para a extremidade inferior do polegar
+    glTranslatef(-0.5, 1.0, 0.0); // Posicao inicial do dedo2 em relacao ao antebraco
+    glRotatef((GLfloat) dedo2, 1.0, 0.0, 0.0); // Rotacao do dedo2 em torno do proprio eixo
+    glTranslatef(0.5, 0.4, -0.2); // Ajuste para a extremidade inferior do dedo2
     glScalef(0.2, 1.0, 0.2);
     glColor3f(0.0, 0.0, 0.0);
     glutSolidCube(1.0); // Tamanho do dedo
@@ -167,9 +162,9 @@ glPopMatrix();
 
 // Anelar
 glPushMatrix();
-    glTranslatef(-0.5, 1.0, 0.0); // Posi��o inicial do anelar em rela��o ao antebra�o
-    glRotatef((GLfloat) anelar, 1.0, 0.0, 0.0); // Rota��o do anelar em torno do pr�prio eixo
-    glTranslatef(0.7, 0.4, 0.0); // Ajuste para a extremidade inferior do anelar
+    glTranslatef(-0.5, 1.0, 0.0); // Posicao inicial do dedo3 em relacao ao antebraco
+    glRotatef((GLfloat) dedo3, 1.0, 0.0, 0.0); // Rotacao do dedo3 em torno do proprio eixo
+    glTranslatef(0.8, 0.4, 0.0); // Ajuste para a extremidade inferior do dedo3
     glScalef(0.2, 1.0, 0.2);
     glColor3f(1.0, 0.3, 0);
     glutSolidCube(1.0); // Tamanho do dedo
@@ -177,9 +172,9 @@ glPopMatrix();
 
 // Indicador
 glPushMatrix();
-    glTranslatef(-0.5, 1.0, 0.0); // Posi��o inicial do indicador em rela��o ao antebra�o
-    glRotatef((GLfloat) indicador, 1.0, 0.0, 0.0); // Rota��o do indicador em torno do pr�prio eixo
-    glTranslatef(0.3, 0.4, 0.0); // Ajuste para a extremidade inferior do indicador
+    glTranslatef(-0.5, 1.0, 0.0); // Posicao inicial do dedo1 em relacao ao antebraco
+    glRotatef((GLfloat) dedo1, 1.0, 0.0, 0.0); // Rotacao do dedo1 em torno do proprio eixo
+    glTranslatef(0.2, 0.4, 0.0); // Ajuste para a extremidade inferior do dedo1
     glScalef(0.2, 1.0, 0.2);
     glColor3f(1.0, 0.3, 0);
 

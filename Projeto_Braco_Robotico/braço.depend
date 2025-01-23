@@ -38,3 +38,12 @@
 	<stdio.h>
 	<stdlib.h>
 
+1737650222 source:c:\users\jamil\onedrive\documentos\ufc\computacao_grafica\projeto_braco_robotico\main.cpp
+	<GLUT/glut.h>
+	<OpenGL/gl.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdio.h>
+	<stdlib.h>
+
